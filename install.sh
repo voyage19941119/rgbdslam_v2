@@ -13,7 +13,7 @@ if test ! -d /opt/ros/kinetic; then
   exit 1
 fi
 
-SUBDIR=~/Code
+SUBDIR=~/rgbdslam/Code
 echo "This script puts all code into '$SUBDIR'. Edit this script to change the location."
 echo "Press enter to continue, Ctrl-C to cancel"
 read
@@ -39,7 +39,7 @@ git clone -b c++03 https://github.com/felixendres/g2o.git $G2O_REPO_DIR
 mkdir $G2O_REPO_DIR/build
 cd $G2O_REPO_DIR/build
 cmake .. -DCMAKE_INSTALL_PREFIX=$G2O_REPO_DIR/install -DG2O_BUILD_EXAMPLES=OFF
-nice make -j2 install
+nice make -j8 install
 
 echo
 echo "Preparing catkin workspace for rgbdslam_v2"
@@ -63,5 +63,5 @@ rosdep install rgbdslam
 echo
 echo "Building rgbdslam_v2"
 echo
-nice catkin_make -C $WORKSPACE -j2
+nice catkin_make -C $WORKSPACE -j8
 
